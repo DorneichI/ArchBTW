@@ -10,8 +10,9 @@
 - tmux stuff
     - show display brightness, keyboard backlight, and battery info in tmux status bar
     - open tmux on tty login
-- fastfetch
+- fastfetch (because i am a poser)
 
 ##### Dependencies
 - tmux
 - acpid
+- fastfetch
