@@ -9,6 +9,7 @@ need() {
 }
 
 need acpid
+need fastfetch
 need install
 need ln
 need systemctl
