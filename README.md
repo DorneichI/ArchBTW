@@ -1,5 +1,5 @@
 ### Ricing my linux setup
-**I use Arch btw** on a 2012 Macbook Air
+**I use Arch btw** on a 2013 Macbook Air
 
 *Not* using a Desktop Environment at the moment because I am just chill like that
 
@@ -10,6 +10,7 @@
 - tmux stuff
     - show display brightness, keyboard backlight, and battery info in tmux status bar
     - open tmux on tty login
+- fastfetch
 
 ##### Dependencies
 - tmux
