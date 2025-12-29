@@ -1,0 +1,31 @@
+#!/bin/sh
+
+BATTERY="/sys/class/power_supply/BAT0"
+
+# ensure the following exist
+[ -r "$BATTERY/capacity" ] || exit 0
+[ -r "$BATTERY/status" ] || exit 0
+[ -r "$BATTERY/charge_full_design" ] || exit 0
+[ -r "$BATTERY/charge_full" ] || exit 0
+
+CAPACITY=$(cat "$BATTERY/capacity")
+STATUS=$(cat "$BATTERY/status")
+
+# get proper capacity relative to max possible charge
+CHARGE_FULL_DESIGN=$(cat "$BATTERY/charge_full_design")
+CHARGE_FULL=$(cat "$BATTERY/charge_full")
+MAX_CAPACITY=$((100 * CHARGE_FULL / CHARGE_FULL_DESIGN))
+RELATIVE_CAPACITY=$((100 * CAPACITY / MAX_CAPACITY))
+
+# ensure rounding doesn't cause >100%
+MAX_PERCENTAGE=100
+[ $RELATIVE_CAPACITY -gt $MAX_PERCENTAGE ] && RELATIVE_CAPACITY=$MAX_PERCENTAGE
+
+# set ICON depending on battery status
+if [ "$STATUS" = "Charging" ]; then
+    ICON="+"
+else
+    ICON=""
+fi
+
+echo "${RELATIVE_CAPACITY}%${ICON}"

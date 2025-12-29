@@ -1,0 +1,24 @@
+#!/bin/bash
+
+DISPLAY_BACKLIGHT="/sys/class/backlight/acpi_video0"
+
+# ensure the following exist
+[ -d "$DISPLAY_BACKLIGHT" ] || exit 0
+[ -r "$DISPLAY_BACKLIGHT/brightness" ] || exit 0
+
+# ensure command line argument is number
+case "$1" in
+    ''|*[!0-9-]*) echo "Usage: $0 <number>"; exit 1;;
+esac
+
+DELTA="$1"
+MIN_BRIGHTNESS=0
+CURRENT_BRIGHTNESS=$(cat "$DISPLAY_BACKLIGHT/brightness")
+
+NEW_BRIGHTNESS=$((CURRENT_BRIGHTNESS - DELTA))
+
+# ensure NEW_BRIGHTNESS is at least MIN_BRIGHTNESS
+[ $NEW_BRIGHTNESS -lt $MIN_BRIGHTNESS ] && NEW_BRIGHTNESS=$MIN_BRIGHTNESS
+
+# set new brightness
+echo $NEW_BRIGHTNESS | sudo tee "$DISPLAY_BACKLIGHT/brightness" > /dev/null

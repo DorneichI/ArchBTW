@@ -1,0 +1,14 @@
+#!/bin/sh
+
+KEYBOARD_BACKLIGHT="/sys/class/leds/smc::kbd_backlight"
+
+# ensure the following exist
+[ -d "$KEYBOARD_BACKLIGHT" ] || exit 0
+[ -r "$KEYBOARD_BACKLIGHT/brightness" ] || exit 0
+[ -r "$KEYBOARD_BACKLIGHT/max_brightness" ] || exit 0
+
+BRIGHTNESS=$(cat "$KEYBOARD_BACKLIGHT/brightness")
+MAX_BRIGHTNESS=$(cat "$KEYBOARD_BACKLIGHT/max_brightness")
+BRIGHTNESS_PERCENTAGE=$((100 * BRIGHTNESS / MAX_BRIGHTNESS))
+
+echo "${BRIGHTNESS_PERCENTAGE}%"

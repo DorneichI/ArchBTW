@@ -1,0 +1,2 @@
+event=video/brightnessup.*
+action=/home/immanuel/.local/bin/display-brightness-up 10

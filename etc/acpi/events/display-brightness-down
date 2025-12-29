@@ -1,0 +1,2 @@
+event=video/brightnessdown.*
+action=/home/immanuel/.local/bin/display-brightness-down 10

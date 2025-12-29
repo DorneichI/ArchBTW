@@ -1,0 +1,2 @@
+event=button/kbdillumup.*
+action=/home/immanuel/.local/bin/keyboard-brightness-up 16

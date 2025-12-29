@@ -1,0 +1,14 @@
+#!/bin/sh
+
+DISPLAY_BACKLIGHT="/sys/class/backlight/acpi_video0"
+
+# ensure the following exist
+[ -d "$DISPLAY_BACKLIGHT" ] || exit 0
+[ -r "$DISPLAY_BACKLIGHT/brightness" ] || exit 0
+[ -r "$DISPLAY_BACKLIGHT/max_brightness" ] || exit 0
+
+BRIGHTNESS=$(cat "$DISPLAY_BACKLIGHT/brightness")
+MAX_BRIGHTNESS=$(cat "$DISPLAY_BACKLIGHT/max_brightness")
+BRIGHTNESS_PERCENTAGE=$((100 * BRIGHTNESS / MAX_BRIGHTNESS))
+
+echo "${BRIGHTNESS_PERCENTAGE}%"
