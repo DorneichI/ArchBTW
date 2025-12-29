@@ -8,3 +8,6 @@
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 PS1='[\u@\h \W]\$ '
+
+# run fastfetch
+command -v fastfetch >/dev/null 2>&1 && fastfetch
