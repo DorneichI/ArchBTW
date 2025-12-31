@@ -23,7 +23,9 @@ ln -sf "$PWD/home/.bash_profile" "$HOME/.bash_profile"
 
 # scripts
 mkdir -p "$HOME/.local"
-ln -sf "$PWD/home/.local/bin" "$HOME/.local/bin"
+for f in "$PWD/home/.local/bin/"*; do
+	ln -sf "$f" "$HOME/.local/bin/$(basename "$f")"
+done
 
 # tmux
 ln -sf "$PWD/home/.tmux.conf" "$HOME/.tmux.conf"
