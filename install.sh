@@ -2,10 +2,10 @@
 set -eu
 
 need() {
-    command -v "$1" >/dev/null 2>&1 || {
-        echo "Error required command '$1' not found"
-        exit 1
-    }
+	command -v "$1" >/dev/null 2>&1 || {
+		echo "Error required command '$1' not found"
+		exit 1
+	}
 }
 
 need acpid
@@ -35,9 +35,9 @@ echo "==> User dotfiles installed"
 echo "==> Installing ACPI event files (requires sudo)"
 
 for f in "$PWD/etc/acpi/events/"*; do
-    [ -f "$f" ] || continue
-    echo "  -> Installing $(basename "$f")"
-    sudo install -m 644 "$f" /etc/acpi/events
+	[ -f "$f" ] || continue
+	echo "  -> Installing $(basename "$f")"
+	sudo install -m 644 "$f" /etc/acpi/events
 done
 
 echo "==> ACPI event files installed"
