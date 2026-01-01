@@ -1,3 +1,87 @@
-.TH MYTOOL 1 "JANUARY 2026" "User Commands"
+.TH ECHO-BATTERY 1 "January 2026" "User Commands"
 .SH NAME
-mytool \- this is just a placeholder
+echo-battery \- print battery charge percentage from sysfs
+.SH SYNOPSIS
+.B echo-battery
+.SH DESCRIPTION
+.B echo-battery
+prints the current battery charge percentage using Linux sysfs power
+supply information from
+.I /sys/class/power_supply/BAT0.
+
+The reported percentage is normalized relative to the battery's original
+design capacity rather than the current maximum charge, allowing degraded
+batteries to still report a meaningful percentage.
+
+If the battery is currently charging, a
+.RB ` + '
+symbol is appended to the output.
+
+If required battery information files are unavailable or unreadable,
+.B echo-battery
+silently exits without producing output.
+
+.SH OUTPUT
+The output consists of a single line in the following format:
+
+.RS
+\fBNN%\fR[\fB+\fR]
+.RE
+
+Where:
+.TP
+.B NN%
+Battery percentage (0–100), rounded down.
+.TP
+.B +
+Present only when the battery status is
+.BR Charging .
+
+.SH FILES
+.TP
+.I /sys/class/power_supply/BAT0/capacity
+Current battery capacity percentage.
+.TP
+.I /sys/class/power_supply/BAT0/status
+Charging state (e.g. Charging, Discharging).
+.TP
+.I /sys/class/power_supply/BAT0/charge_full_design
+Original design charge capacity.
+.TP
+.I /sys/class/power_supply/BAT0/charge_full
+Current maximum charge capacity.
+
+.SH EXIT STATUS
+.TP
+.B 0
+Successful execution or missing battery data.
+
+.SH ENVIRONMENT
+No environment variables are used.
+
+.SH EXAMPLES
+Display battery percentage:
+.RS
+.nf
+$ echo-battery
+87%
+.fi
+.RE
+
+Display battery percentage while charging:
+.RS
+.nf
+$ echo-battery
+42%+
+.fi
+.RE
+
+.SH NOTES
+This utility assumes the battery device is named
+.B BAT0.
+Systems with differently named battery devices may require modification.
+
+Designed for lightweight usage in status bars, scripts, and window managers.
+
+.SH AUTHOR
+Immanuel Dorneich
