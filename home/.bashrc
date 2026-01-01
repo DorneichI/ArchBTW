@@ -20,3 +20,6 @@ alias links-ff='links -http.fake-user-agent "Mozilla/5.0 (X11; Linux x86_64) Gec
 
 # add asdf shims and bin to PATH
 export PATH="$HOME/.asdf/shims:$HOME/.asdf/bin:$PATH"
+
+# make user written man pages available to man
+export MANPATH="$HOME/.local/share/man:$MANPATH"
