@@ -1,0 +1,14 @@
+#!/bin/sh
+
+nmcli -t -f WIFI general status | grep -q '^enabled$' || {
+	echo "off"
+	exit 0
+}
+
+SSID=$(nmcli -t -f ACTIVE,SSID dev wifi | awk -F: '$1=="yes"{print $2}')
+
+if [ -n "$SSID" ]; then
+	echo "$SSID"
+else
+	echo "--"
+fi
