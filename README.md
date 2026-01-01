@@ -5,11 +5,11 @@
 - no window manager
 - pure tty
 
-### why this exists
+### why
 - hire me
 - genuine interest
 
-### what has been added
+### what
 
 ##### tmux
 - starts on login
