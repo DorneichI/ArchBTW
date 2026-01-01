@@ -1,18 +1,33 @@
-### Ricing my linux setup
-**I use Arch btw** on a 2013 Macbook Air
+# ricing
+- **i use arch btw** 
+- on a 2013 macbook air
+- no desktop environment
+- no window manager
+- pure tty
 
-*Not* using a Desktop Environment at the moment because I am just chill like that
+### why this exists
+- hire me
+- genuine interest
 
-##### So far:
-- reviving function keys
+### what has been added
+
+##### tmux
+- starts on login
+- status bar includes:
+    - wifi status
     - keyboard backlight
     - display brightness
-- tmux stuff
-    - show display brightness, keyboard backlight, and battery info in tmux status bar
-    - open tmux on tty login
-- fastfetch (because i am a poser)
+    - battery status
 
-##### Dependencies
+##### function keys
+the following function keys fulfill their original purpose again:
+- display brightness
+- keyboard backlight
+
+##### fastfetch
+- for validation
+
+### dependencies
 - tmux
 - acpid
 - fastfetch
