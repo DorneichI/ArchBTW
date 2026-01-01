@@ -6,7 +6,7 @@
 - pure tty
 
 ### why
-- hire me
+- [hire me](https://www.linkedin.com/in/dorneich/)
 - genuine interest
 
 ### what
