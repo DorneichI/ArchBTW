@@ -1,6 +1,8 @@
 #!/bin/sh
 set -eu
 
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+
 need() {
 	command -v "$1" >/dev/null 2>&1 || {
 		echo "Error required command '$1' not found"
@@ -15,6 +17,21 @@ need ln
 need systemctl
 need tmux
 
+link_files() {
+	src_dir=$1
+	dst_dir=$2
+	pattern=$3
+
+	mkdir -p "$dst_dir"
+
+	for f in "$src_dir"/$pattern; do
+		[ -e "$f" ] || continue
+		target="$dst_dir/$(basename "$f")"
+		rm -f -- "$target"
+		ln -s -- "$f" "$target"
+	done
+}
+
 echo "==> Installing user dotfiles"
 
 # shell
@@ -22,13 +39,13 @@ ln -sf "$PWD/home/.bashrc" "$HOME/.bashrc"
 ln -sf "$PWD/home/.bash_profile" "$HOME/.bash_profile"
 
 # scripts
-mkdir -p "$HOME/.local"
-for f in "$PWD/home/.local/bin/"*; do
-	ln -sf "$f" "$HOME/.local/bin/$(basename "$f")"
-done
+link_files "$SCRIPT_DIR/home/.local/bin" "$HOME/.local/bin" "*"
 
 # tmux
 ln -sf "$PWD/home/.tmux.conf" "$HOME/.tmux.conf"
+
+# man pages
+link_files "$SCRIPT_DIR/home/.local/share/man/man1" "$HOME/.local/share/man/man1" "*.1"
 
 echo "==> User dotfiles installed"
 
