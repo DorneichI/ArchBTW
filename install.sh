@@ -21,14 +21,15 @@ link_files() {
 	src_dir=$1
 	dst_dir=$2
 	pattern=$3
+	run=${4:-} # optional to pass sudo
 
 	mkdir -p "$dst_dir"
 
 	for f in "$src_dir"/$pattern; do
 		[ -e "$f" ] || continue
 		target="$dst_dir/$(basename "$f")"
-		rm -f -- "$target"
-		ln -s -- "$f" "$target"
+		$run rm -f -- "$target"
+		$run ln -s -- "$f" "$target"
 	done
 }
 
